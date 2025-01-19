@@ -42,13 +42,14 @@
         #image-container {
             position: relative;
             width: 100%;
-            max-width: 600px;
-            height: 400px;
-            margin: 20px auto;
+            height: 100%;
+            overflow: hidden;
         }
 
         #image-container img {
             position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -82,6 +83,10 @@
 
         button:hover {
             background: #e60044;
+        }
+
+        #result {
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -152,6 +157,7 @@
 
             images.forEach(img => img.classList.remove('active'));
             document.querySelector(`#image-container img[src="${showImage}"]`).classList.add('active');
+            passcodeInput.value = ""; // Clear the input field
         }
 
         function showFinalImage(yes) {
