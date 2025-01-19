@@ -45,8 +45,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            overflow: hidden;
             z-index: -1;
+            overflow: hidden;
         }
 
         #image-container img {
@@ -57,7 +57,7 @@
             height: 100%;
             object-fit: cover;
             opacity: 0;
-            transition: opacity 1s ease-in-out;
+            transition: opacity 1s;
         }
 
         #image-container img.active {
@@ -130,6 +130,7 @@
             currentIndex = (currentIndex + 1) % 5; // Loop through the first 5 images
         }
 
+        // Start the slideshow
         setInterval(fadeImages, 3000);
 
         // Passcode logic
@@ -159,10 +160,7 @@
             }
 
             images.forEach(img => img.classList.remove('active'));
-            const targetImage = document.querySelector(`#image-container img[src="${showImage}"]`);
-            if (targetImage) {
-                targetImage.classList.add('active');
-            }
+            document.querySelector(`#image-container img[src="${showImage}"]`).classList.add('active');
             passcodeInput.value = ""; // Clear the input field
         }
 
@@ -176,4 +174,3 @@
     </script>
 </body>
 </html>
-
