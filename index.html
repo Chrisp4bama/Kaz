@@ -57,7 +57,7 @@
             height: 100%;
             object-fit: cover;
             opacity: 0;
-            transition: opacity 1s;
+            transition: opacity 1s ease-in-out;
         }
 
         #image-container img.active {
@@ -116,24 +116,23 @@
     <div id="result"></div>
 
     <script>
-        // Fading slideshow logic
+        // Slideshow Logic
         const images = document.querySelectorAll('#image-container img');
         let currentIndex = 0;
 
-        function fadeImages() {
-            images.forEach((img, index) => {
-                img.classList.remove('active');
-                if (index === currentIndex) {
-                    img.classList.add('active');
-                }
-            });
-            currentIndex = (currentIndex + 1) % 5; // Loop through the first 5 images
+        function startSlideshow() {
+            setInterval(() => {
+                images.forEach((img, index) => {
+                    img.classList.remove('active');
+                    if (index === currentIndex) {
+                        img.classList.add('active');
+                    }
+                });
+                currentIndex = (currentIndex + 1) % 5; // Loop through first 5 images
+            }, 3000); // Change image every 3 seconds
         }
 
-        // Start the slideshow
-        setInterval(fadeImages, 3000);
-
-        // Passcode logic
+        // Passcode Logic
         const passcodeInput = document.getElementById('passcode');
         const resultDiv = document.getElementById('result');
 
@@ -159,6 +158,7 @@
                 resultDiv.innerHTML = '<span style="color: red;">Please try again</span>';
             }
 
+            // Display the appropriate image
             images.forEach(img => img.classList.remove('active'));
             document.querySelector(`#image-container img[src="${showImage}"]`).classList.add('active');
             passcodeInput.value = ""; // Clear the input field
@@ -171,6 +171,9 @@
                 resultDiv.innerHTML = '<h2>I'm so grateful to call you mine, I love you babe!</h2>';
             }
         }
+
+        // Start the slideshow when the page loads
+        startSlideshow();
     </script>
 </body>
 </html>
