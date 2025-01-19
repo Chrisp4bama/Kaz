@@ -103,11 +103,6 @@
         <img src="three.jpg" alt="Image 3">
         <img src="four.jpg" alt="Image 4">
         <img src="five.jpg" alt="Image 5">
-        <img src="wow.jpg" alt="Wow">
-        <img src="wrong.jpg" alt="Wrong">
-        <img src="six.jpg" alt="Six">
-        <img src="seven.jpg" alt="Seven">
-        <img src="eight.jpg" alt="Eight">
     </div>
 
     <input type="text" id="passcode" placeholder="Enter passcode">
@@ -128,7 +123,7 @@
                         img.classList.add('active');
                     }
                 });
-                currentIndex = (currentIndex + 1) % 5; // Loop through first 5 images
+                currentIndex = (currentIndex + 1) % 5; // Loop through the 5 images
             }, 3000); // Change image every 3 seconds
         }
 
