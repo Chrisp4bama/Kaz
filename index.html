@@ -22,9 +22,14 @@
 
         h1 {
             font-size: 3em;
-            margin: 0;
+            margin: 10px 0;
             position: relative;
             z-index: 1;
+        }
+
+        h2 {
+            font-size: 1.2em;
+            margin: 20px 0 10px 0;
         }
 
         #image-container {
@@ -51,6 +56,34 @@
         #image-container img.active {
             opacity: 1;
         }
+
+        input {
+            padding: 10px;
+            font-size: 1em;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            background: #ff004c;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #e60044;
+        }
+
+        #result {
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
@@ -62,26 +95,55 @@
         <img src="three.jpg" alt="Image 3">
         <img src="four.jpg" alt="Image 4">
         <img src="five.jpg" alt="Image 5">
+        <img src="wow.jpg" alt="Wow">
+        <img src="eight.jpg" alt="Eight">
     </div>
 
+    <h2 id="message">Please enter the magic phrase</h2>
+    <input type="text" id="phrase" placeholder="Type here">
+    <button onclick="checkPhrase()">Enter</button>
+
     <script>
-        // Get all images and set the initial index
+        // Slideshow Logic
         const images = document.querySelectorAll('#image-container img');
         let currentIndex = 0;
 
-        // Function to update the active image
-        function updateImage() {
-            images.forEach((img, index) => {
-                img.classList.remove('active');
-                if (index === currentIndex) {
-                    img.classList.add('active');
-                }
-            });
-            currentIndex = (currentIndex + 1) % images.length; // Loop back to the first image
+        function startSlideshow() {
+            setInterval(() => {
+                images.forEach((img, index) => {
+                    img.classList.remove('active');
+                    if (index === currentIndex) {
+                        img.classList.add('active');
+                    }
+                });
+                currentIndex = (currentIndex + 1) % 5; // Loop through the 5 images
+            }, 3000); // Change image every 3 seconds
         }
 
-        // Change image every 3 seconds
-        setInterval(updateImage, 3000);
+        // Phrase Logic
+        function checkPhrase() {
+            const input = document.getElementById('phrase').value.trim().toLowerCase();
+            const message = document.getElementById('message');
+            let showImage;
+
+            if (input === "chains") {
+                showImage = "wow.jpg";
+                message.textContent = "Wowwww";
+            } else {
+                showImage = "eight.jpg";
+                message.textContent = "Try again";
+            }
+
+            // Display the appropriate image
+            images.forEach(img => img.classList.remove('active'));
+            document.querySelector(`#image-container img[src="${showImage}"]`).classList.add('active');
+
+            // Clear the input field
+            document.getElementById('phrase').value = "";
+        }
+
+        // Start the slideshow
+        startSlideshow();
     </script>
 </body>
 </html>
