@@ -147,6 +147,12 @@
         } else if (["i love you", "love", "valentines", "iloveyou"].includes(input)) {
             showImage = "six.jpg";
             message.textContent = "Will you be my Valentine?? (type yes or no)";
+    
+            // Add the rotation effect for image six.jpg
+            setTimeout(() => {
+                const sixImage = document.querySelector('#image-container img[src="six.jpg"]');
+                sixImage.style.transform = "rotate(180deg)";
+            }, 10);  // Slight delay to ensure image is loaded before rotating
         } else if (input === "yes" || input === "yes!") {
             showImage = "seven.jpg";
             message.textContent = "Thank you for being the best girlfriend on the planet, I love you so so much babe! Happy Valentine's Day!";
