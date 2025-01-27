@@ -97,6 +97,9 @@
         <img src="five.jpg" alt="Image 5">
         <img src="wow.jpg" alt="Wow">
         <img src="eight.jpg" alt="Eight">
+        <img src="wrong.jpg" alt="Wrong">
+        <img src="six.jpg" alt="Six">
+        <img src="seven.jpg" alt="Seven">
     </div>
 
     <h2 id="message">Please enter the magic phrase</h2>
@@ -135,13 +138,23 @@
             // Stop slideshow once the user submits a phrase
             stopSlideshow();
 
-            if (input === "chains") {
-                showImage = "wow.jpg";
-                message.textContent = "Wowwww";
-            } else {
-                showImage = "eight.jpg";
-                message.textContent = "Try again";
-            }
+        if (input === "chains") {
+            showImage = "wow.jpg";
+            message.textContent = "Wowwww";
+        } else if (["i love you more", "iloveyoumore", "iloveyoumore", "i love you more"].includes(input)) {
+            showImage = "wrong.jpg";
+            message.textContent = "Very very wrong, try again.";
+        } else if (["i love you", "love", "valentines", "iloveyou"].includes(input)) {
+            showImage = "six.jpg";
+            message.textContent = "Will you be my Valentine?? (type yes or no)";
+        } else if (input === "yes" || input === "yes!") {
+            showImage = "seven.jpg";
+            message.textContent = "Thank you for being the best girlfriend on the planet, I love you so so much babe! Happy Valentine's Day!";
+        } else {
+            showImage = "eight.jpg";
+            message.textContent = "Try again";
+        }
+
 
             // Display the appropriate image
             images.forEach(img => img.classList.remove('active'));
