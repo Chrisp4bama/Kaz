@@ -104,20 +104,26 @@
     <button onclick="checkPhrase()">Enter</button>
 
     <script>
-        // Slideshow Logic
+        // Get all images and initialize slideshow
         const images = document.querySelectorAll('#image-container img');
         let currentIndex = 0;
+        let slideshowInterval;
 
         function startSlideshow() {
-            setInterval(() => {
+            slideshowInterval = setInterval(() => {
                 images.forEach((img, index) => {
                     img.classList.remove('active');
                     if (index === currentIndex) {
                         img.classList.add('active');
                     }
                 });
-                currentIndex = (currentIndex + 1) % 5; // Loop through the 5 images
-            }, 3000); // Change image every 3 seconds
+                currentIndex = (currentIndex + 1) % 5; // Loop through the first 5 images
+            }, 3000);
+        }
+
+        // Stop the slideshow
+        function stopSlideshow() {
+            clearInterval(slideshowInterval);
         }
 
         // Phrase Logic
@@ -125,6 +131,9 @@
             const input = document.getElementById('phrase').value.trim().toLowerCase();
             const message = document.getElementById('message');
             let showImage;
+
+            // Stop slideshow once the user submits a phrase
+            stopSlideshow();
 
             if (input === "chains") {
                 showImage = "wow.jpg";
@@ -142,7 +151,7 @@
             document.getElementById('phrase').value = "";
         }
 
-        // Start the slideshow
+        // Start the slideshow when the page loads
         startSlideshow();
     </script>
 </body>
